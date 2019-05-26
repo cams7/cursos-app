@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from './app-common/login/auth.service';
 
@@ -12,6 +13,7 @@ export class AppComponent implements OnInit {
   private _mostrarMenu: boolean;
 
   constructor(
+    private router: Router,
     private authService: AuthService
   ) {
   }
@@ -25,6 +27,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this._mostrarMenu = false;
+    this.router.navigate(['/login']);
   }
 
   get mostrarMenu() {
