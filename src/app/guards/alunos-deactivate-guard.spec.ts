@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AlunosDeactivateGuard } from '../alunos/alunos-deactivate-guard';
+import { AlunosDeactivateGuard } from '../alunos/guards/alunos-deactivate-guard';
 
 describe('AlunosDeactivateGuardService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

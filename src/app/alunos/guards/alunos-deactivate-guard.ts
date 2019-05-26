@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanDeactivate, UrlTree } from '@angular/router';
 
-import { FormCanDeactivate } from '../app-common/form-can-deactivate';
+import { FormCanDeactivate } from '../../app-common/form-can-deactivate';
 
 @Injectable()
 export class AlunosDeactivateGuard implements CanDeactivate<FormCanDeactivate> { 

@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { switchMap, finalize, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { finalize, takeUntil, tap } from 'rxjs/operators';
 
-import { AlunoService } from '../aluno.service';
 import { Aluno } from 'src/app/app-common/models/aluno';
 
 @Component({
@@ -14,34 +13,20 @@ import { Aluno } from 'src/app/app-common/models/aluno';
 export class AlunoDetalheComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
-  private id: number;
-
-  private _aluno$: Observable<Aluno>;
+  
+  private _aluno: Aluno;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private alunoService: AlunoService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this._aluno$ = this.route.params.pipe(
-      switchMap((params: any) => {
-        this.id = <number>params['id'];
-        return this.alunoService.getAluno(this.id);
-      }),
-      tap({
-        next: data => {
-          console.log('on next:', data);
-        },
-        error: error => {
-          console.log('on error:', error);
-          this.router.navigate(['/alunoNaoEncontrado']);
-        },
-        complete: () => console.log('on complete')
-      }),    
+    this.route.data.pipe(
       takeUntil(this.unsubscribe$),      
-      finalize(() => console.log('params: completed'))
+      finalize(() => console.log('data: completed'))
+    ).subscribe(
+      (info: {aluno: Aluno}) => this._aluno = info.aluno
     );
   }
 
@@ -51,10 +36,10 @@ export class AlunoDetalheComponent implements OnInit, OnDestroy {
   }
 
   editarContato(){
-    this.router.navigate(['/alunos', this.id, 'editar']);
+    this.router.navigate(['/alunos', this._aluno.id, 'editar']);
   }
 
-  get aluno$() {
-    return this._aluno$;
+  get aluno() {
+    return this._aluno;
   }
 }

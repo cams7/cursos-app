@@ -9,7 +9,8 @@ import { AlunoFormularioComponent } from './aluno-formulario/aluno-formulario.co
 import { AlunoListagemComponent } from './aluno-listagem/aluno-listagem.component';
 
 import { AlunoService } from './aluno.service';
-import { AlunosDeactivateGuard } from './alunos-deactivate-guard';
+import { AlunosDeactivateGuard } from './guards/alunos-deactivate-guard';
+import { AlunoResolver } from './guards/aluno-resolver';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AlunosDeactivateGuard } from './alunos-deactivate-guard';
   ], 
   providers: [
     AlunoService,
-    AlunosDeactivateGuard
+    AlunosDeactivateGuard,
+    AlunoResolver
   ]
 })
 export class AlunosModule { }
