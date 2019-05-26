@@ -7,7 +7,7 @@
             <ng-template #login>
                 <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
             </ng-template>                    
-            <li routerLinkActive="active"><a routerLink="">Home</a></li>
+            <li routerLinkActive="active"><a routerLink="/home">Home</a></li>
             <li routerLinkActive="active" *ngIf="mostrarMenu"><a routerLink="/cursos" [queryParams]="{pagina:1}">Cursos</a></li>   
             <li routerLinkActive="active" *ngIf="mostrarMenu"><a routerLink="/alunos" >Alunos</a></li>  
         </ul>

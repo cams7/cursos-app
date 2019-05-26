@@ -4,6 +4,8 @@ import { Observable, Subject } from 'rxjs';
 import { switchMap, finalize, takeUntil, tap } from 'rxjs/operators';
 
 import { AlunoService } from '../aluno.service';
+import { FormCanDeactivate } from 'src/app/app-common/form-can-deactivate';
+
 import { Aluno } from 'src/app/app-common/models/aluno';
 
 @Component({
@@ -11,12 +13,14 @@ import { Aluno } from 'src/app/app-common/models/aluno';
   templateUrl: './aluno-formulario.component.html',
   styleUrls: ['./aluno-formulario.component.css']
 })
-export class AlunoFormularioComponent implements OnInit, OnDestroy {
-
+export class AlunoFormularioComponent implements OnInit, OnDestroy, FormCanDeactivate {
+  
   private unsubscribe$ = new Subject<void>();
   private id: number;
 
   private _aluno$: Observable<Aluno>;
+
+  private formMudou: boolean = false;
 
   constructor(
     private router: Router,
@@ -48,6 +52,18 @@ export class AlunoFormularioComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  onInput(){
+    this.formMudou = true;
+    console.log('mudou');
+  }
+
+  podeDesativar(): boolean {
+    if (this.formMudou) 
+      return confirm('Tem certeza que deseja sair dessa página?');
+    
+    return true;
   }
 
   get aluno$() {

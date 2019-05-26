@@ -5,6 +5,8 @@ import { AlunoListagemComponent } from './aluno-listagem/aluno-listagem.componen
 import { AlunoFormularioComponent } from './aluno-formulario/aluno-formulario.component';
 import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
 
+import { AlunosDeactivateGuard } from './alunos-deactivate-guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -16,7 +18,8 @@ const routes: Routes = [
       },
       {
         path: ':id/editar',
-        component: AlunoFormularioComponent
+        component: AlunoFormularioComponent,
+        canDeactivate: [AlunosDeactivateGuard]
       },
       {
         path: ':id',
