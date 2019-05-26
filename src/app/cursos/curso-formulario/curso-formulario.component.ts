@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CursoService } from '../curso.service';
+
 @Component({
   selector: 'app-curso-formulario',
   templateUrl: './curso-formulario.component.html',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CursoFormularioComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private cursoService: CursoService
+  ) { }
 
   ngOnInit() {
   }

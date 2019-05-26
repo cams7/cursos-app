@@ -1,3 +1,6 @@
-<p>
-  curso-detalhe works!
-</p>
+<div *ngIf="curso$  | async as curso">
+  <p>
+    Id: {{ curso.id }}
+  </p>
+  <p>Curso: {{ curso.nome }}</p>
+</div>
