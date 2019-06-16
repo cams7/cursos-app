@@ -1,0 +1,115 @@
+-------------------------------------------- 08/06/19 --------------------------------------------
+npm install -g @angular/cli
+cd "C:\My\Desenv\Angular\Workspace"
+git config --global user.email "ceanma@gmail.com"
+git config --global user.name "César Magalhães"
+ng new cursos-app
+cd "C:\My\Desenv\Angular\Workspace\cursos-app"
+ng version
+code
+ng serve --open
+
+#https://fullstackengine.net/create-wedding-page-angular-materialize/
+#https://medium.com/@ashimrajkonwar/using-materializecss-with-angular-7-x-91f34d37bdcc
+#https://materializecss.com/
+npm install materialize-css --save
+npm install angular2-materialize --save
+
+npm install jquery --save
+npm install hammerjs --save
+npm audit fix
+
+ng generate module app-routing --flat --module=app
+
+ng g m alunos --routing
+ng g c alunos/aluno-detalhe
+ng g c alunos/aluno-formulario
+ng g c alunos/aluno-listagem
+ng g s alunos/aluno --module=alunos
+
+ng g m cursos --routing
+ng g c cursos/curso-detalhe
+ng g c cursos/curso-formulario
+ng g c cursos/curso-listagem
+ng g s cursos/curso --module=cursos
+
+ng g m home --routing
+ng g c home
+
+ng g m app-common
+ng g m app-common/login
+ng g c app-common/login
+ng g s app-common/login/auth --module=login
+
+ng g c app-common/pagina-nao-encontrada
+
+ng generate i app-common/models/aluno
+ng generate i app-common/models/curso
+ng generate i app-common/models/usuario
+
+#https://www.learnrxjs.io/
+#https://www.concretepage.com/angular/
+
+ng g s guards/auth-guard
+ng g s guards/cursos-guard
+ng g s guards/alunos-guard
+
+ng generate i app-common/FormCanDeactivate
+ng g s alunos/guards/alunos-deactivate-guard
+ng g s alunos/guards/aluno-resolver
+
+git remote add origin https://github.com/cams7/cursos-app.git
+git remote -v
+git pull origin master --allow-unrelated-histories
+git push origin master
+
+
+-------------------------------------------- 15/06/19 --------------------------------------------
+
+cd "C:\My\Desenv\My"
+git clone https://github.com/cams7/cursos-app.git
+cd "C:\My\Desenv\My\cursos-app\frontend"
+code
+#https://www.techiediaries.com/updating-angular-cli-projects/
+npm install -g @angular/cli
+
+
+cd "C:\My\Desenv\My\cursos-app\frontend"
+
+
+cd "C:\My\Desenv\My\cursos-app\backend"
+gradlew build
+gradlew clean bootJar
+java -jar build/libs/cursos-app-0.0.1-SNAPSHOT.jar
+gradlew clean test javadoc bootRun
+#http://localhost:8010/cursos-app/
+#file:///C:/My/Desenv/My/cursos-app/backend/build/reports/tests/test/index.html
+#file:///C:/My/Desenv/My/cursos-app/backend/build/docs/javadoc/br/com/cams7/app/cursosapp/package-summary.html
+
+-------------------------------------------- 16/06/19 --------------------------------------------
+
+cd "C:\My\Desenv\My\cursos-app\backend"
+gradlew clean bootJar
+java -jar build/libs/cursos-app-0.0.1-SNAPSHOT.jar
+
+cd "C:\My\Desenv\My\cursos-app\frontend"
+npm install
+code
+ng serve --open
+
+npm uninstall materialize-css --save
+npm uninstall angular2-materialize --save
+npm uninstall jquery --save
+npm uninstall hammerjs --save
+
+#https://update.angular.io/#7.0:8.0
+ng update @angular/cli @angular/core
+ng update
+
+npm install --save bootstrap
+#https://www.w3schools.com/bootstrap4/bootstrap_get_started.asp
+
+
+
+
+
