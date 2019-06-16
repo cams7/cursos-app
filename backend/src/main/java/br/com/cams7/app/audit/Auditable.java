@@ -3,7 +3,6 @@
  */
 package br.com.cams7.app.audit;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -28,10 +27,9 @@ import br.com.cams7.app.model.UsuarioEntity;
  * @author ceanm
  *
  */
-@SuppressWarnings("serial")
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable implements Serializable {
+public abstract class Auditable {
 
 	@JsonView(View.Public.class)
 	@CreatedBy

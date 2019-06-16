@@ -37,7 +37,6 @@ import br.com.cams7.app.audit.Auditable;
 @NamedEntityGraph(name = AlunoEntity.SHOW_CURSOS, attributeNodes = { @NamedAttributeNode("cursos") })
 @NamedEntityGraph(name = AlunoEntity.SHOW_CURSOS_AND_CREATEDBY_AND_LASTMODIFIEDBY, attributeNodes = {
 		@NamedAttributeNode("createdBy"), @NamedAttributeNode("lastModifiedBy"), @NamedAttributeNode("cursos") })
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_aluno", uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
 @EntityListeners(AuditingEntityListener.class)

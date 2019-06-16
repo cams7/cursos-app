@@ -47,10 +47,11 @@ public class AlunoServiceImpl implements AlunoService {
 
 	@Override
 	public AlunoEntity createAluno(AlunoEntity aluno) {
+		List<CursoEntity> cursos = aluno.getCursos();
 		AlunoEntity savedAluno = alunoRepository.save(aluno);
-		List<CursoEntity> cursos = savedAluno.getCursos();
+
 		if (cursos != null)
-			cursos.stream().filter(curso -> curso.getId() != null).mapToLong(curso -> curso.getId())
+			cursos.stream().filter(curso -> curso.getId() != null && curso.getCreatedDate() == null).mapToLong(curso -> curso.getId())
 					.forEach(cursoId -> {
 						if (cursoId == 1l)
 							throw new RuntimeException("O curso \"Curso de Springboot 2 e Angular 8\" já esta lotado");

@@ -28,7 +28,6 @@ import br.com.cams7.app.audit.Auditable;
  * @author ceanm
  *
  */
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_curso")
 @EntityListeners(AuditingEntityListener.class)
