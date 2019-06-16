@@ -16,19 +16,13 @@ export class AlunoResolver implements Resolve<Aluno> {
 
   resolve(
     route: ActivatedRouteSnapshot, 
-    state: RouterStateSnapshot): Aluno | Observable<Aluno> | Promise<Aluno> {
-      console.log('AlunoResolver');            
+    state: RouterStateSnapshot): Aluno | Observable<Aluno> | Promise<Aluno> {         
       let id = route.params['id'];      
-      return this.alunoService.getAluno(id).pipe(
+      return this.alunoService.getAlunoById(id).pipe(
         tap({
-          next: data => {
-            console.log('on next:', data);
-          },
           error: error => {
-            console.log('on error:', error);
             this.router.navigate(['/alunoNaoEncontrado']);
-          },
-          complete: () => console.log('on complete')
+          }
         }),
       );
   }

@@ -14,18 +14,18 @@ const routes: Routes = [
   },
   {
     path: 'home', 
-    loadChildren: './home/home.module#HomeModule'
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'cursos', 
-    loadChildren: './cursos/cursos.module#CursosModule',
+    loadChildren: () => import('./cursos/cursos.module').then(m => m.CursosModule),
     canActivate: [AuthGuard],
     canActivateChild: [CursosGuard],
     canLoad: [AuthGuard]
   },
   {
     path: 'alunos', 
-    loadChildren: './alunos/alunos.module#AlunosModule',
+    loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule),
     canActivate: [AuthGuard],
     canActivateChild: [AlunosGuard],
     canLoad: [AuthGuard]

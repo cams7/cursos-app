@@ -1,4 +1,9 @@
-export interface Curso {
+import { Auditable } from './auditable';
+import { Aluno } from './aluno';
+
+export interface Curso extends Auditable {
     id: number,
-    nome: string
+    nome: string,
+    temAlunosMatriculados: boolean,
+    alunos: Aluno[]
 }

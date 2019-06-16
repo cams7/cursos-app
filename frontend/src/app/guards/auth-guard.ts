@@ -17,7 +17,6 @@ export class AuthGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot, 
     state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    console.log('AuthGuard');
     return this.verificarAcesso();
   }
 
@@ -25,7 +24,6 @@ export class AuthGuard implements CanActivate, CanLoad {
     route: Route, 
     segments: UrlSegment[]
   ): boolean | Observable<boolean> | Promise<boolean> {
-    console.log('canLoad: verificando se usuário pode carregar o cod módulo');
     return this.verificarAcesso();
   }
 

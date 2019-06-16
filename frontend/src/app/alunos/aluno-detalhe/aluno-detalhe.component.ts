@@ -23,8 +23,7 @@ export class AlunoDetalheComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.data.pipe(
-      takeUntil(this.unsubscribe$),      
-      finalize(() => console.log('data: completed'))
+      takeUntil(this.unsubscribe$)
     ).subscribe(
       (info: {aluno: Aluno}) => this._aluno = info.aluno
     );

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil, finalize, tap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { CursoService } from '../curso.service';
 import { Curso } from 'src/app/app-common/models/curso';
@@ -29,19 +29,9 @@ export class CursoListagemComponent implements OnInit, OnDestroy {
       switchMap((queryParams: any) => {
         let pagina = queryParams['pagina']; 
         this._pagina = pagina ? pagina : 0;
-        return this.cursoService.cursos$;        
+        return this.cursoService.allCursos$;        
       }),
-      tap({
-        next: data => {
-          console.log('on next:', data);
-        },
-        error: error => {
-          console.log('on error:', error);
-        },
-        complete: () => console.log('on complete')
-      }),
-      takeUntil(this.unsubscribe$),
-      finalize(() => console.log('queryParams: completed'))
+      takeUntil(this.unsubscribe$)
     );
   }
 

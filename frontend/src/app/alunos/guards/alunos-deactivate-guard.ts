@@ -13,8 +13,6 @@ export class AlunosDeactivateGuard implements CanDeactivate<FormCanDeactivate> {
     component: FormCanDeactivate, 
     currentRoute: ActivatedRouteSnapshot, 
     currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-      console.log('guarda de desativação');
-
       return component.podeDesativar ? component.podeDesativar() : true;
   }
 }

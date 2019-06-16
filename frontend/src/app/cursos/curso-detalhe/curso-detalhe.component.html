@@ -1,6 +1,11 @@
+<legend>Detalhes do do curso</legend>
 <div *ngIf="curso$  | async as curso">
-  <p>
-    Id: {{ curso.id }}
-  </p>
-  <p>Curso: {{ curso.nome }}</p>
+  <div class="row">
+    <div class="col-sm-3">ID</div>
+    <div class="col-sm-9">{{ curso.id }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">Nome</div>
+    <div class="col-sm-9">{{ curso.nome }}</div>
+  </div>
 </div>

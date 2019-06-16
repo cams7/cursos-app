@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject, of } from 'rxjs';
-import { switchMap, finalize, takeUntil, tap } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { CursoService } from '../curso.service';
 import { Curso } from 'src/app/app-common/models/curso';
@@ -27,20 +27,14 @@ export class CursoDetalheComponent implements OnInit, OnDestroy {
     this._curso$ = this.route.params.pipe(
       switchMap((params: any) => {
         let id: number = <number>params['id'];
-        return this.cursoService.getCurso(id);
+        return this.cursoService.getCursoById(id);
       }),
       tap({
-        next: data => {
-          console.log('on next:', data);
-        },
         error: error => {
-          console.log('on error:', error);
           this.router.navigate(['/cursoNaoEncontrado']);
-        },
-        complete: () => console.log('on complete')
+        }
       }),    
-      takeUntil(this.unsubscribe$),      
-      finalize(() => console.log('params: completed'))
+      takeUntil(this.unsubscribe$)
     );
   }
 

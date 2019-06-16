@@ -1,9 +1,17 @@
-<h5>Detalhes do Aluno</h5>
-
+<legend>Detalhes do Aluno</legend>
 <div>
-  <p>Id: {{ aluno?.id }}</p>
-  <p>Nome: {{ aluno?.nome }}</p>
-  <p>Email: {{ aluno?.email }}</p>
-  <a class="waves-effect waves-light btn" (click)="editarContato()">Editar</a>
-</div>
+  <div class="row">
+    <div class="col-sm-3">ID</div>
+    <div class="col-sm-9">{{ aluno?.id }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">Nome</div>
+    <div class="col-sm-9">{{ aluno?.nome }}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">E-mail</div>
+    <div class="col-sm-9">{{ aluno?.email }}</div>
+  </div>
 
+  <a role="button" class="btn btn-dark" (click)="editarContato()">Editar</a>
+</div>
