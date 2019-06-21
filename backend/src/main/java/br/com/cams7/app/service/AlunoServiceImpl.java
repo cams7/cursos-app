@@ -54,7 +54,7 @@ public class AlunoServiceImpl implements AlunoService {
 			cursos.stream().filter(curso -> curso.getId() != null && curso.getCreatedDate() == null).mapToLong(curso -> curso.getId())
 					.forEach(cursoId -> {
 						if (cursoId == 1l)
-							throw new RuntimeException("O curso \"Curso de Springboot 2 e Angular 8\" já esta lotado");
+							throw new IllegalArgumentException("O curso \"Curso de Springboot 2 e Angular 8\" já esta lotado");
 						cursoService.updateCurso(cursoId, true);
 					});
 

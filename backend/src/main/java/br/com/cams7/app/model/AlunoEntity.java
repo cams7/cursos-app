@@ -21,7 +21,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -29,11 +30,14 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.cams7.app.View;
 import br.com.cams7.app.audit.Auditable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author ceanm
  *
  */
+@ApiModel(description = "Classe que representa um aluno.")
 @NamedEntityGraph(name = AlunoEntity.SHOW_CURSOS, attributeNodes = { @NamedAttributeNode("cursos") })
 @NamedEntityGraph(name = AlunoEntity.SHOW_CURSOS_AND_CREATEDBY_AND_LASTMODIFIEDBY, attributeNodes = {
 		@NamedAttributeNode("createdBy"), @NamedAttributeNode("lastModifiedBy"), @NamedAttributeNode("cursos") })
@@ -45,6 +49,7 @@ public class AlunoEntity extends Auditable {
 	public static final String SHOW_CURSOS = "Aluno.showCursos";
 	public static final String SHOW_CURSOS_AND_CREATEDBY_AND_LASTMODIFIEDBY = "Aluno.showCursosAndCreatedByAndLastModifiedBy";
 
+	@ApiModelProperty(notes = "Identificador unico do aluno.", example = "1", required = true, position = 0)
 	@JsonView(View.Public.class)
 	@Id
 	@SequenceGenerator(name = "sq_aluno", sequenceName = "sq_aluno", allocationSize = 1, initialValue = 1)
@@ -52,17 +57,20 @@ public class AlunoEntity extends Auditable {
 	@Column(name = "id_aluno")
 	private Long id;
 
+	@ApiModelProperty(notes = "Nome do aluno.", example = "Fábio Joaquim da Mata", required = true, position = 5)
 	@JsonView(View.Public.class)
-	@NotEmpty
-	@Column(nullable = false)
+	@NotBlank
+	@Size(min = 3, max = 50)
 	private String nome;
 
+	@ApiModelProperty(notes = "E-mail do aluno.", example = "fabio@teste.com", required = true, position = 6)
 	@JsonView(View.Public.class)
+	@NotBlank
+	@Size(min = 10, max = 30)
 	@Email
-	@NotEmpty
-	@Column(nullable = false)
 	private String email;
 
+	@ApiModelProperty(notes = "Listagem com os cursos do aluno.", required = false, position = 3)
 	@JsonView(View.Public.class)
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tb_aluno_curso", joinColumns = { @JoinColumn(name = "id_aluno") }, inverseJoinColumns = {

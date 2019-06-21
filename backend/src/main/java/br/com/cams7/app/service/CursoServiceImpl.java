@@ -48,7 +48,7 @@ public class CursoServiceImpl implements CursoService {
 	@Override
 	public void updateCurso(Long cursoId, boolean temAlunosMatriculados) {
 		if (cursoId == 4l)
-			throw new RuntimeException("O curso \"Curso de Excel Avançado\" já esta lotado");
+			throw new IllegalArgumentException("O curso \"Curso de Excel Avançado\" já esta lotado");
 
 		if (!cursoRepository.isTemAlunosMatriculados(cursoId))
 			cursoRepository.updateCurso(cursoId, temAlunosMatriculados);

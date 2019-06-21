@@ -85,12 +85,12 @@ gradlew clean test javadoc bootRun
 #http://localhost:8010/cursos-app/
 #file:///C:/My/Desenv/My/cursos-app/backend/build/reports/tests/test/index.html
 #file:///C:/My/Desenv/My/cursos-app/backend/build/docs/javadoc/br/com/cams7/app/cursosapp/package-summary.html
-
+#http://localhost:8010/cursos-app/swagger-ui.html
 -------------------------------------------- 16/06/19 --------------------------------------------
 
 cd "C:\My\Desenv\My\cursos-app\backend"
 gradlew clean bootJar
-java -jar build/libs/cursos-app-0.0.1-SNAPSHOT.jar
+java --add-opens java.base/java.lang=ALL-UNNAMED -jar /My/Desenv/My/cursos-app/backend/build/libs/cursos-app-0.0.1-SNAPSHOT.jar
 
 cd "C:\My\Desenv\My\cursos-app\frontend"
 npm install
@@ -108,6 +108,26 @@ ng update
 
 npm install --save bootstrap
 #https://www.w3schools.com/bootstrap4/bootstrap_get_started.asp
+
+-------------------------------------------- 20/06/19 --------------------------------------------
+
+cd C:\My\Desenv\My
+git clone https://gitlab.com/cams7/devdojo-springboot.git
+mvn clean install -f C:\My\Desenv\My\devdojo-springboot -DskipTests
+java --add-opens java.base/java.lang=ALL-UNNAMED -jar /My/Desenv/My/devdojo-springboot/target/devdojo.jar
+
+#https://medium.com/@raphaelbluteau/spring-boot-swagger-documentando-sua-api-automaticamente-27903293aeb6
+#https://www.vojtechruzicka.com/documenting-spring-boot-rest-api-swagger-springfox/
+#http://localhost:8020/devdojo-springboot/swagger-ui.html
+
+
+
+mvn install -f C:\My\Desenv\Java\Examples\spring-boot\spring-boot-samples -DskipTests
+mvn install -f C:\My\Desenv\Java\Examples\spring-boot\spring-boot-project -DskipTests
+mvn install -f C:\My\Desenv\Java\Examples\spring-boot -DskipTests
+
+
+
 
 
 

@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import br.com.cams7.app.View;
 import br.com.cams7.app.model.UsuarioEntity;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author ceanm
@@ -31,23 +32,27 @@ import br.com.cams7.app.model.UsuarioEntity;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Auditable {
 
+	@ApiModelProperty(notes = "Usuário que criou essa entidade.", required = false, position = 1)
 	@JsonView(View.Public.class)
 	@CreatedBy
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "criado_por")
 	private UsuarioEntity createdBy;
 
+	@ApiModelProperty(notes = "Data de criação dessa entidade.", required = false, position = 2)
 	@JsonView(View.Public.class)
 	@CreatedDate
 	@Column(name = "data_criacao")
 	private LocalDateTime createdDate;
 
+	@ApiModelProperty(notes = "Usuário que alterou essa entidade.", required = false, position = 3)
 	@JsonView(View.Public.class)
 	@LastModifiedBy
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "modificado_por")
 	private UsuarioEntity lastModifiedBy;
 
+	@ApiModelProperty(notes = "Data de alteração dessa entidade.", required = false, position = 4)
 	@JsonView(View.Public.class)
 	@LastModifiedDate
 	@Column(name = "data_alteracao")
