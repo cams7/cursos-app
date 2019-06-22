@@ -3,8 +3,6 @@
  */
 package br.com.cams7.app.service;
 
-import java.util.List;
-
 import br.com.cams7.app.model.UsuarioEntity;
 
 /**
@@ -12,13 +10,15 @@ import br.com.cams7.app.model.UsuarioEntity;
  *
  */
 public interface UsuarioService {
-	List<UsuarioEntity> getAllUsuarios();
+	Iterable<UsuarioEntity> getAllUsuarios();
 
 	UsuarioEntity getUsuarioById(Long usuarioId);
 
+	UsuarioEntity getUsuarioByNome(String nome);
+
 	UsuarioEntity createUsuario(UsuarioEntity usuario);
 
-	UsuarioEntity updateUsuario(Long usuarioId, UsuarioEntity usuario);
+	void updateUsuario(UsuarioEntity usuario);
 
 	void deleteUsuario(Long usuarioId);
 }

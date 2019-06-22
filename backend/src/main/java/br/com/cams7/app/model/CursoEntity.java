@@ -26,12 +26,22 @@ import br.com.cams7.app.View;
 import br.com.cams7.app.audit.Auditable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author ceanm
  *
  */
 @ApiModel(description = "Classe que representa um curso.")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Entity
 @Table(name = "tb_curso")
 @EntityListeners(AuditingEntityListener.class)
@@ -48,49 +58,16 @@ public class CursoEntity extends Auditable {
 	@ApiModelProperty(notes = "Nome do curso.", example = "Curso de Java Básico", required = true, position = 5)
 	@JsonView(View.Public.class)
 	@NotBlank
-    @Size(min = 3, max = 50)
+	@Size(min = 3, max = 50)
 	private String nome;
 
 	@ApiModelProperty(notes = "Flag que indica se o curso tem alunos matriculas.", required = true, position = 6)
 	@JsonView(View.Public.class)
-	@Column(name = "tem_alunos_matriculados")
+	@Column(name = "tem_alunos_matriculados", nullable = false)
 	private boolean temAlunosMatriculados;
 
 	@ApiModelProperty(notes = "Listagem com os alunos do curso.", required = false, position = 7)
 	@JsonView(View.Public.class)
 	@ManyToMany(mappedBy = "cursos", fetch = FetchType.LAZY)
 	private List<AlunoEntity> alunos;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public boolean isTemAlunosMatriculados() {
-		return temAlunosMatriculados;
-	}
-
-	public void setTemAlunosMatriculados(boolean temAlunosMatriculados) {
-		this.temAlunosMatriculados = temAlunosMatriculados;
-	}
-
-	public List<AlunoEntity> getAlunos() {
-		return alunos;
-	}
-
-	public void setAlunos(List<AlunoEntity> alunos) {
-		this.alunos = alunos;
-	}
-
 }

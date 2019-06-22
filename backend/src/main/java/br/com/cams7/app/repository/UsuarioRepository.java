@@ -3,7 +3,9 @@
  */
 package br.com.cams7.app.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+
+import org.springframework.data.repository.CrudRepository;
 
 import br.com.cams7.app.model.UsuarioEntity;
 
@@ -11,6 +13,8 @@ import br.com.cams7.app.model.UsuarioEntity;
  * @author ceanm
  *
  */
-public interface UsuarioRepository extends UsuarioRepositoryCustom, JpaRepository<UsuarioEntity, Long> {
+public interface UsuarioRepository extends UsuarioRepositoryCustom, CrudRepository<UsuarioEntity, Long> {
+	
+	Optional<UsuarioEntity> findByNome(String nome);
 
 }

@@ -17,7 +17,7 @@ import br.com.cams7.app.model.UsuarioEntity;
 public class App {
 
 	@Bean
-	protected Module module() {
+	public Module module() {
 		return new Hibernate5Module();
 	}
 

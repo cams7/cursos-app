@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.cams7.app.error.InvalidDataException;
+import br.com.cams7.app.error.ResourceNotFoundException;
 import br.com.cams7.app.model.AlunoEntity;
 import br.com.cams7.app.model.CursoEntity;
 import br.com.cams7.app.repository.AlunoRepository;
@@ -29,7 +31,7 @@ public class AlunoServiceImpl implements AlunoService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<AlunoEntity> getAllAlunos() {
+	public Iterable<AlunoEntity> getAllAlunos() {
 		return alunoRepository.findAll();
 	}
 
@@ -42,7 +44,8 @@ public class AlunoServiceImpl implements AlunoService {
 	@Transactional(readOnly = true)
 	@Override
 	public AlunoEntity getAlunoById(Long alunoId) {
-		return alunoRepository.findAlunoWithCursosById(alunoId).get();
+		return alunoRepository.findAlunoWithCursosById(alunoId).orElseThrow(
+				() -> new ResourceNotFoundException(String.format("O aluno não foi encontrado pelo id: %d", alunoId)));
 	}
 
 	@Override
@@ -51,10 +54,11 @@ public class AlunoServiceImpl implements AlunoService {
 		AlunoEntity savedAluno = alunoRepository.save(aluno);
 
 		if (cursos != null)
-			cursos.stream().filter(curso -> curso.getId() != null && curso.getCreatedDate() == null).mapToLong(curso -> curso.getId())
-					.forEach(cursoId -> {
+			cursos.stream().filter(curso -> curso.getId() != null && curso.getCreatedDate() == null)
+					.mapToLong(curso -> curso.getId()).forEach(cursoId -> {
 						if (cursoId == 1l)
-							throw new IllegalArgumentException("O curso \"Curso de Springboot 2 e Angular 8\" já esta lotado");
+							throw new InvalidDataException(
+									"O curso \"Curso de Springboot 2 e Angular 8\" já esta lotado");
 						cursoService.updateCurso(cursoId, true);
 					});
 
@@ -62,8 +66,8 @@ public class AlunoServiceImpl implements AlunoService {
 	}
 
 	@Override
-	public AlunoEntity updateAluno(Long alunoId, AlunoEntity aluno) {
-		return createAluno(aluno);
+	public void updateAluno(AlunoEntity aluno) {
+		createAluno(aluno);
 	}
 
 	@Override

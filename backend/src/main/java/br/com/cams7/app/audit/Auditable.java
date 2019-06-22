@@ -23,11 +23,15 @@ import com.fasterxml.jackson.annotation.JsonView;
 import br.com.cams7.app.View;
 import br.com.cams7.app.model.UsuarioEntity;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author ceanm
  *
  */
+@Getter
+@Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Auditable {
@@ -57,37 +61,4 @@ public abstract class Auditable {
 	@LastModifiedDate
 	@Column(name = "data_alteracao")
 	private LocalDateTime lastModifiedDate;
-
-	public UsuarioEntity getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(UsuarioEntity createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public UsuarioEntity getLastModifiedBy() {
-		return lastModifiedBy;
-	}
-
-	public void setLastModifiedBy(UsuarioEntity lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
-	}
-
-	public LocalDateTime getLastModifiedDate() {
-		return lastModifiedDate;
-	}
-
-	public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
-		this.lastModifiedDate = lastModifiedDate;
-	}
-
 }

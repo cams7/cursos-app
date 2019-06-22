@@ -32,12 +32,22 @@ import br.com.cams7.app.View;
 import br.com.cams7.app.audit.Auditable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author ceanm
  *
  */
 @ApiModel(description = "Classe que representa um aluno.")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode(of = "id", callSuper = false)
 @NamedEntityGraph(name = AlunoEntity.SHOW_CURSOS, attributeNodes = { @NamedAttributeNode("cursos") })
 @NamedEntityGraph(name = AlunoEntity.SHOW_CURSOS_AND_CREATEDBY_AND_LASTMODIFIEDBY, attributeNodes = {
 		@NamedAttributeNode("createdBy"), @NamedAttributeNode("lastModifiedBy"), @NamedAttributeNode("cursos") })
@@ -76,37 +86,4 @@ public class AlunoEntity extends Auditable {
 	@JoinTable(name = "tb_aluno_curso", joinColumns = { @JoinColumn(name = "id_aluno") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_curso") })
 	private List<CursoEntity> cursos;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public List<CursoEntity> getCursos() {
-		return cursos;
-	}
-
-	public void setCursos(List<CursoEntity> cursos) {
-		this.cursos = cursos;
-	}
-
 }

@@ -3,12 +3,11 @@
  */
 package br.com.cams7.app.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.cams7.app.error.ResourceNotFoundException;
 import br.com.cams7.app.model.UsuarioEntity;
 import br.com.cams7.app.repository.UsuarioRepository;
 
@@ -25,14 +24,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<UsuarioEntity> getAllUsuarios() {
+	public Iterable<UsuarioEntity> getAllUsuarios() {
 		return usuarioRepository.findAll();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public UsuarioEntity getUsuarioById(Long usuarioId) {
-		return usuarioRepository.findById(usuarioId).get();
+		return usuarioRepository.findById(usuarioId).orElseThrow(() -> new ResourceNotFoundException(
+				String.format("O usuario não foi encontrado pelo id: %d", usuarioId)));
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public UsuarioEntity getUsuarioByNome(String nome) {
+		return usuarioRepository.findByNome(nome).orElseThrow(
+				() -> new ResourceNotFoundException(String.format("O usuario não foi encontrado pelo nome: %s", nome)));
 	}
 
 	@Override
@@ -41,13 +48,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public UsuarioEntity updateUsuario(Long usuarioId, UsuarioEntity usuario) {
-		return createUsuario(usuario);
+	public void updateUsuario(UsuarioEntity usuario) {
+		createUsuario(usuario);
 	}
 
 	@Override
 	public void deleteUsuario(Long usuarioId) {
-		usuarioRepository.deleteById(usuarioId);
+		UsuarioEntity usuario = getUsuarioById(usuarioId);
+		usuarioRepository.delete(usuario);
 	}
 
 }

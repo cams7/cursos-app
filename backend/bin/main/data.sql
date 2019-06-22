@@ -5,11 +5,12 @@ DELETE FROM tb_usuario;
 ALTER SEQUENCE sq_usuario RESTART WITH 1;
 ALTER SEQUENCE sq_curso RESTART WITH 1;
 ALTER SEQUENCE sq_aluno RESTART WITH 1;
-INSERT INTO tb_usuario(id_usuario, nome, senha, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'cams7', '12345', null, NOW(), null, NOW());
-INSERT INTO tb_usuario(id_usuario, nome, senha, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'maria', '12345', 1, NOW(), 1, NOW());
-INSERT INTO tb_usuario(id_usuario, nome, senha, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'sergio', '12345', 1, NOW(), 2, NOW());
-INSERT INTO tb_usuario(id_usuario, nome, senha, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'yuri', '12345', 2, NOW(), 1, NOW());
-INSERT INTO tb_usuario(id_usuario, nome, senha, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'isaac', '12345', 3, NOW(), 3, NOW());
+--senha: 12345
+INSERT INTO tb_usuario(id_usuario, nome, senha, administrador, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'cams7', '$2a$10$duT4TtfhJiiQl4a8HAuol.U0mXorX/1YOi.KYwdDx.ajqdC7w3ZV6', 1, null, NOW(), null, NOW());
+INSERT INTO tb_usuario(id_usuario, nome, senha, administrador, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'maria', '$2a$10$duT4TtfhJiiQl4a8HAuol.U0mXorX/1YOi.KYwdDx.ajqdC7w3ZV6', 1, 1, NOW(), 1, NOW());
+INSERT INTO tb_usuario(id_usuario, nome, senha, administrador, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'sergio', '$2a$10$duT4TtfhJiiQl4a8HAuol.U0mXorX/1YOi.KYwdDx.ajqdC7w3ZV6', 0, 1, NOW(), 2, NOW());
+INSERT INTO tb_usuario(id_usuario, nome, senha, administrador, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'yuri', '$2a$10$duT4TtfhJiiQl4a8HAuol.U0mXorX/1YOi.KYwdDx.ajqdC7w3ZV6', 0, 2, NOW(), 1, NOW());
+INSERT INTO tb_usuario(id_usuario, nome, senha, administrador, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_usuario.nextval,'isaac', '$2a$10$duT4TtfhJiiQl4a8HAuol.U0mXorX/1YOi.KYwdDx.ajqdC7w3ZV6', 0, 3, NOW(), 3, NOW());
 INSERT INTO tb_curso(id_curso, nome, tem_alunos_matriculados, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_curso.nextval,'Curso de Springboot 2 e Angular 8', 1, 1, NOW(), null, NOW());
 INSERT INTO tb_curso(id_curso, nome, tem_alunos_matriculados, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_curso.nextval,'Curso de Docker', 1, 2, NOW(), 1, NOW());
 INSERT INTO tb_curso(id_curso, nome, tem_alunos_matriculados, criado_por, data_criacao, modificado_por, data_alteracao) VALUES (sq_curso.nextval,'Curso de Kubernete', 1, 2, NOW(), null, NOW());

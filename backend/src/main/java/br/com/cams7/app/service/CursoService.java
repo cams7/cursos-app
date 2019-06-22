@@ -3,8 +3,6 @@
  */
 package br.com.cams7.app.service;
 
-import java.util.List;
-
 import br.com.cams7.app.model.CursoEntity;
 
 /**
@@ -12,13 +10,13 @@ import br.com.cams7.app.model.CursoEntity;
  *
  */
 public interface CursoService {
-	List<CursoEntity> getAllCursos();
+	Iterable<CursoEntity> getAllCursos();
 
 	CursoEntity getCursoById(Long cursoId);
 
 	CursoEntity createCurso(CursoEntity curso);
 
-	CursoEntity updateCurso(Long cursoId, CursoEntity curso);
+	void updateCurso(CursoEntity curso);
 
 	void updateCurso(Long cursoId, boolean temAlunosMatriculados);
 

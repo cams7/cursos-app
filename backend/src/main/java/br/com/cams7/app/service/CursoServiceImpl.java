@@ -3,12 +3,12 @@
  */
 package br.com.cams7.app.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.cams7.app.error.InvalidDataException;
+import br.com.cams7.app.error.ResourceNotFoundException;
 import br.com.cams7.app.model.CursoEntity;
 import br.com.cams7.app.repository.CursoRepository;
 
@@ -25,14 +25,15 @@ public class CursoServiceImpl implements CursoService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<CursoEntity> getAllCursos() {
+	public Iterable<CursoEntity> getAllCursos() {
 		return cursoRepository.findAll();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public CursoEntity getCursoById(Long cursoId) {
-		return cursoRepository.findById(cursoId).get();
+		return cursoRepository.findById(cursoId).orElseThrow(
+				() -> new ResourceNotFoundException(String.format("O curso não foi encontrado pelo id: %d", cursoId)));
 	}
 
 	@Override
@@ -41,14 +42,14 @@ public class CursoServiceImpl implements CursoService {
 	}
 
 	@Override
-	public CursoEntity updateCurso(Long cursoId, CursoEntity curso) {
-		return createCurso(curso);
+	public void updateCurso(CursoEntity curso) {
+		createCurso(curso);
 	}
 
 	@Override
 	public void updateCurso(Long cursoId, boolean temAlunosMatriculados) {
 		if (cursoId == 4l)
-			throw new IllegalArgumentException("O curso \"Curso de Excel Avançado\" já esta lotado");
+			throw new InvalidDataException("O curso \"Curso de Excel Avançado\" já esta lotado");
 
 		if (!cursoRepository.isTemAlunosMatriculados(cursoId))
 			cursoRepository.updateCurso(cursoId, temAlunosMatriculados);

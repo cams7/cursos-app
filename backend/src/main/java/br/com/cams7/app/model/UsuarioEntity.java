@@ -22,12 +22,22 @@ import br.com.cams7.app.View;
 import br.com.cams7.app.audit.Auditable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author ceanm
  *
  */
 @ApiModel(description = "Classe que representa um usuário.")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Entity
 @Table(name = "tb_usuario")
 @EntityListeners(AuditingEntityListener.class)
@@ -52,37 +62,7 @@ public class UsuarioEntity extends Auditable {
 	@Column(nullable = false, length = 100)
 	private String senha;
 
-	public UsuarioEntity() {
-		super();
-	}
-
-	public UsuarioEntity(Long id) {
-		super();
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
+	@ApiModelProperty(notes = "Flag que indica se o usuário é um administrador.", required = true, position = 7)
+	@Column(name = "administrador", nullable = false)
+	private boolean admin;
 }

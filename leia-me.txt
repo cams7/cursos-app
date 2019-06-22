@@ -126,6 +126,11 @@ mvn install -f C:\My\Desenv\Java\Examples\spring-boot\spring-boot-samples -Dskip
 mvn install -f C:\My\Desenv\Java\Examples\spring-boot\spring-boot-project -DskipTests
 mvn install -f C:\My\Desenv\Java\Examples\spring-boot -DskipTests
 
+-------------------------------------------- 22/06/19 --------------------------------------------
+
+https://dicasdejava.com.br/como-configurar-o-lombok-no-eclipse/
+java -jar /My/Desenv/Java/lombok.jar
+
 
 
 
